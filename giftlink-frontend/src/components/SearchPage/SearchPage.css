@@ -1,26 +1,64 @@
 /* Task 1: Style the search input field */
 .search-input {
-    /* Insert specific CSS properties here */
+    width: 75%;
+    margin-right: 1rem;
 }
 
 /* Task 2: Style the search button */
 .search-button {
-    /* Insert specific CSS properties here */
+    width: 20%;
+    background-color: #007bff
+    color: white;
 }
 
 /* Task 3: Customize dropdown filters */
 .dropdown-filter {
-    /* Insert specific CSS properties here */
+    margin-bottom: 1rem;
+    border: 1px solid #ced4da;
 }
 
 /* Task 4: Style the age range slider */
 .age-range-slider {
-    /* Insert specific CSS properties here */
+    width: 100%;
 }
 
 /* Task 5: Enhance search results cards appearance */
 .search-results-card {
-    /* Insert specific CSS properties here */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
 }
 
 /* Additional placeholders for tasks 6 to 10 */
+/* 6 - No Products Found alert-info */
+.alert-info {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 0.75rem 1.25rem;
+    margin-top: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+}
+
+/* 7 - Hover effect on search result cards */
+.search-results-card:hover {
+    transition: box-shadow 0.3 ease-in-out;
+}
+
+/* 8 - Images in search results */
+.card-img-top {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+/* 9 - Responsive for smaller screens */
+@media (max-width: 768px) {
+    .search-bar .form-control, .search-bar .btn {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+    }
+    .search-bar .btn {
+        width: auto;
+    }
+}
