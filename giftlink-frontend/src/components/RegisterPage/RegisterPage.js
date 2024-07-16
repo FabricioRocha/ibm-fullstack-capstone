@@ -3,7 +3,6 @@ import {urlConfig} from '../../config';
 import { useAppContext } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import './RegisterPage.css';
-import { post } from '../../../../giftlink-backend/routes/authRoutes';
 
 function RegisterPage() {
 
@@ -19,38 +18,43 @@ function RegisterPage() {
 
     // insert code here to create handleRegister function and include console.log
     const handleRegister = async () => {
-        try{
-            const response = await fetch(`${urlConfig.backendUrl}/api/auth/register`, {
-                //Task 6: Set method
-                method: POST,
-                //Task 7: Set headers
-                    headers: {'content-type': 'application/json'},
-                //Task 8: Set body to send user details
-                body: JSON.stringify({
-                    firstName: firstName,
-                    lastName: lastName,
-                    email: email,
-                    password: password
-                })
-            });
-        } catch (e) {
-            console.log("Error fetching details: " + e.message);
-        }
+        const response = await fetch(`${urlConfig.backendUrl}/api/auth/register`, {
+            //Step 1 - Task 6
+            method: 'POST',
+            //Step 1 - Task 7
+            headers: {
+                'content-type': 'application/json',
+            },
+            //Step 1 - Task 8
+            body: JSON.stringify({
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                password: password
+            })
+        });
         
+        //Step 2 - Task 1
         const json = await response.json();
+        console.log('json data', json);
+        console.log('er', json.error);
+        
+        //Step 2 - Task 2
         if (json.authtoken) {
             sessionStorage.setItem('auth-token', json.authtoken);
             sessionStorage.setItem('name', firstName);
             sessionStorage.setItem('email', json.email);
+        
+            //Step 2 - Task 3
             setIsLoggedIn(true);
+        
+            //Step 2 - Task 4
             navigate('/app');
         }
-
         if (json.error) {
+        //Step 2 - Task 5
             setShowerr(json.error);
         }
-
-
     }   
 
     return (

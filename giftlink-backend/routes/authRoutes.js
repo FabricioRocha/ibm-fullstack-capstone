@@ -7,7 +7,7 @@ const { body, validationResult } = require('express-validator');
 const connectToDatabase = require('../models/db');
 const router = express.Router();
 const dotenv = require('dotenv');
-const pino = require('pino');  // Import Pino logger
+const pino = require('pino');
 
 //Step 1 - Task 3: Create a Pino logger instance
 const logger = pino();  // Create a Pino logger instance
