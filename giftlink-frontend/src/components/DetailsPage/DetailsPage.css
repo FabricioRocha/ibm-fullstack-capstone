@@ -31,12 +31,14 @@
     /* Task 4 styling */
     background-color: darkblue;
     color: white;
+    padding: 4px;
 }
 
 /* Style for details title */
 .details-title {
     /* Task 5 styling */
     font-size: 1.2rem;
+    font-weight: bold;
 }
 
 /* Style for comments section */
@@ -45,6 +47,12 @@
     background-color: white;
     color: gray;
     margin: 0 auto;
+    margin-top: 20px;
     padding: 8px;
 }
 
+.comments-section .card {
+    border-radius: 8px;
+    border: 1px gray;
+    margin-bottom: 8px;
+}
