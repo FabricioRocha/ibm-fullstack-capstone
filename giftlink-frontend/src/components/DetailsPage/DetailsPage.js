@@ -27,6 +27,9 @@ function DetailsPage() {
                 }
                 const data = await response.json();
                 setGift(data);
+
+                let jdata = JSON.stringify(data);
+                console.log (`Gift data fetched: ${jdata}`);
             } catch (error) {
                 setError(error.message);
             } finally {
@@ -39,7 +42,7 @@ function DetailsPage() {
 		// Task 3: Scroll to top on component mount
 		window.scrollTo(0, 0);
 
-    }, [productId]);
+    }, [productId, navigate]);
 
 
     const handleBackClick = () => {
@@ -86,33 +89,34 @@ function DetailsPage() {
                 <div className="card-body">
                     <div className="image-placeholder-large">
                         {gift.image ? (
-                            // Task 5: Display gift image
+                            /* Task 5: Display gift image */
                             <img src={gift.image} alt={gift.name} className="product-image-large" />
                         ) : (
                             <div className="no-image-available-large">No Image Available</div>
                         )}
                     </div>
-                    // Task 6: Display gift details
+                    {/* Task 6: Display gift details */}
+                    
                         <p><strong>Category:</strong> 
-                            gift.category
+                            {gift.category}
                         </p>
                         <p><strong>Condition:</strong> 
-                            gift.condition
+                            {gift.condition}
                         </p>
                         <p><strong>Date Added:</strong> 
-                            gift.date_added
+                            {gift.dateAdded}
                         </p>
                         <p><strong>Age (Years):</strong> 
-                            gift.age_years
+                            {gift.age}
                         </p>
                         <p><strong>Description:</strong> 
-                            gift.description
+                            {gift.description}
                         </p>
                 </div>
             </div>
             <div className="comments-section mt-4">
                 <h3 className="mb-3">Comments</h3>
-                // Task 7: Render comments section by using the map function to go through all the comments
+                {/* Task 7: Render comments section by using the map function to go through all the comments */}
                 {comments.map((comment, index) => (
                     <div key={index} className="card mb-3">
                         <div className="card-body">
