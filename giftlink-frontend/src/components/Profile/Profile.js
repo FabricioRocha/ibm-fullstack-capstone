@@ -5,36 +5,36 @@ import {urlConfig} from '../../config';
 import { useAppContext } from '../../context/AuthContext';
 
 const Profile = () => {
-  const [userDetails, setUserDetails] = useState({});
- const [updatedDetails, setUpdatedDetails] = useState({});
- const {setUserName} = useAppContext();
- const [changed, setChanged] = useState("");
+    const [userDetails, setUserDetails] = useState({});
+    const [updatedDetails, setUpdatedDetails] = useState({});
+    const {setUserName} = useAppContext();
+    const [changed, setChanged] = useState("");
 
- const [editMode, setEditMode] = useState(false);
-  const navigate = useNavigate();
-  useEffect(() => {
-    const authtoken = sessionStorage.getItem("auth-token");
-    if (!authtoken) {
-      navigate("/app/login");
-    } else {
-      fetchUserProfile();
-    }
-  }, [navigate]);
+    const [editMode, setEditMode] = useState(false);
+    const navigate = useNavigate();
+    useEffect(() => {
+        const authtoken = sessionStorage.getItem("auth-token");
+        if (!authtoken) {
+        navigate("/app/login");
+        } else {
+        fetchUserProfile();
+        }
+    }, [navigate]);
 
-  const fetchUserProfile = async () => {
-    try {
-      const authtoken = sessionStorage.getItem("auth-token");
-      const email = sessionStorage.getItem("email");
-      const name=sessionStorage.getItem('name');
-      if (name || authtoken) {
-                const storedUserDetails = {
-                  name: name,
-                  email:email
-                };
+    const fetchUserProfile = async () => {
+        try {
+        const authtoken = sessionStorage.getItem("auth-token");
+        const email = sessionStorage.getItem("email");
+        const name=sessionStorage.getItem('name');
+        if (name || authtoken) {
+                    const storedUserDetails = {
+                    name: name,
+                    email:email
+                    };
 
-                setUserDetails(storedUserDetails);
-                setUpdatedDetails(storedUserDetails);
-              }
+                    setUserDetails(storedUserDetails);
+                    setUpdatedDetails(storedUserDetails);
+                }
 } catch (error) {
   console.error(error);
   // Handle error case
@@ -46,11 +46,12 @@ setEditMode(true);
 };
 
 const handleInputChange = (e) => {
-setUpdatedDetails({
-  ...updatedDetails,
-  [e.target.name]: e.target.value,
-});
+    setUpdatedDetails({
+    ...updatedDetails,
+    [e.target.name]: e.target.value,
+    });
 };
+
 const handleSubmit = async (e) => {
   e.preventDefault();
 
@@ -65,19 +66,26 @@ const handleSubmit = async (e) => {
 
     const payload = { ...updatedDetails };
     const response = await fetch(`${urlConfig.backendUrl}/api/auth/update`, {
-      //Step 1: Task 1
-      //Step 1: Task 2
-      //Step 1: Task 3
+      method: 'PUT',//Step 1: Task 1
+      headers: {
+        "Authorization": `Bearer ${authtoken}`,
+        "Content-Type": "application/json",
+        "Email": email,
+      }, //Step 1: Task 2
+      body: JSON.stringify(payload)//Step 1: Task 3
     });
 
     if (response.ok) {
       // Update the user details in session storage
       //Step 1: Task 4
+      setUserName(updatedDetails.name);
+
       //Step 1: Task 5
+      sessionStorage.setItem("name", updatedDetails.name);
       setUserDetails(updatedDetails);
       setEditMode(false);
       // Display success message to the user
-      setChanged("Name Changed Successfully!");
+      setChanged("Name changed successfully!");
       setTimeout(() => {
         setChanged("");
         navigate("/");
