@@ -28,8 +28,6 @@ function DetailsPage() {
                 const data = await response.json();
                 setGift(data);
 
-                let jdata = JSON.stringify(data);
-                console.log (`Gift data fetched: ${jdata}`);
             } catch (error) {
                 setError(error.message);
             } finally {
@@ -79,6 +77,16 @@ function DetailsPage() {
     if (error) return <div>Error: {error}</div>;
     if (!gift) return <div>Gift not found</div>;
 
+    let formattedDate = 'Unknown';
+    if (gift.date_added) {
+        let date = new Date(gift.date_added * 1000);
+        let year = date.getFullYear();
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+
+        formattedDate = `${year}-${month}-${day}`;
+    }
+
     return (
         <div className="container mt-5">
             <button className="btn btn-secondary mb-3" onClick={handleBackClick}>Back</button>
@@ -97,19 +105,19 @@ function DetailsPage() {
                     </div>
                     {/* Task 6: Display gift details */}
                     
-                        <p><strong>Category:</strong> 
+                        <p><strong>Category: </strong> 
                             {gift.category}
                         </p>
-                        <p><strong>Condition:</strong> 
+                        <p><strong>Condition: </strong> 
                             {gift.condition}
                         </p>
-                        <p><strong>Date Added:</strong> 
-                            {gift.dateAdded}
+                        <p><strong>Date Added: </strong> 
+                            {formattedDate}
                         </p>
-                        <p><strong>Age (Years):</strong> 
-                            {gift.age}
+                        <p><strong>Age (Years): </strong> 
+                            {gift.age_years}
                         </p>
-                        <p><strong>Description:</strong> 
+                        <p><strong>Description: </strong> 
                             {gift.description}
                         </p>
                 </div>
